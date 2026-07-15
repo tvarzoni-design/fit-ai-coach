@@ -29,17 +29,30 @@ import { CommunityModule } from './modules/community/community.module';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        type: 'postgres',
-        host: config.get('DB_HOST', 'localhost'),
-        port: config.get<number>('DB_PORT', 5432),
-        username: config.get('DB_USERNAME', 'fitcoach'),
-        password: config.get('DB_PASSWORD'),
-        database: config.get('DB_NAME', 'fit_ai_coach'),
-        autoLoadEntities: true,
-        synchronize: config.get('APP_ENV') !== 'production',
-        logging: config.get('APP_ENV') === 'development',
-      }),
+      useFactory: (config: ConfigService) => {
+        const dbUrl = config.get<string>('DATABASE_URL');
+        if (dbUrl) {
+          return {
+            type: 'postgres' as const,
+            url: dbUrl,
+            ssl: { rejectUnauthorized: false },
+            autoLoadEntities: true,
+            synchronize: config.get('APP_ENV') !== 'production',
+            logging: config.get('APP_ENV') === 'development',
+          };
+        }
+        return {
+          type: 'postgres' as const,
+          host: config.get('DB_HOST', 'localhost'),
+          port: config.get<number>('DB_PORT', 5432),
+          username: config.get('DB_USERNAME', 'fitcoach'),
+          password: config.get('DB_PASSWORD'),
+          database: config.get('DB_NAME', 'fit_ai_coach'),
+          autoLoadEntities: true,
+          synchronize: config.get('APP_ENV') !== 'production',
+          logging: config.get('APP_ENV') === 'development',
+        };
+      },
     }),
 
     AuthModule,
