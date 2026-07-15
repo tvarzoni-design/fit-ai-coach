@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
@@ -29,11 +29,11 @@ import { CommunityModule } from './modules/community/community.module';
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => {
+      useFactory: (config: ConfigService): TypeOrmModuleOptions => {
         const dbUrl = config.get<string>('DATABASE_URL');
         if (dbUrl) {
           return {
-            type: 'postgres' as const,
+            type: 'postgres',
             url: dbUrl,
             ssl: { rejectUnauthorized: false },
             autoLoadEntities: true,
@@ -42,7 +42,7 @@ import { CommunityModule } from './modules/community/community.module';
           };
         }
         return {
-          type: 'postgres' as const,
+          type: 'postgres',
           host: config.get('DB_HOST', 'localhost'),
           port: config.get<number>('DB_PORT', 5432),
           username: config.get('DB_USERNAME', 'fitcoach'),
