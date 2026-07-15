@@ -430,4 +430,80 @@ class ApiService extends ChangeNotifier {
   Future<Response> getProcessingLogs() {
     return _dio.get('/lgpd/processing-logs');
   }
+
+  // ========================================
+  // WORKOUTS EXTRAS
+  // ========================================
+  Future<Response> getWorkoutHistory() {
+    return _dio.get('/workouts', queryParameters: {'history': true});
+  }
+
+  Future<Response> getPreviousWorkouts() {
+    return _dio.get('/workouts', queryParameters: {'completed': true});
+  }
+
+  // ========================================
+  // PROGRESS EXTRAS
+  // ========================================
+  Future<Response> getWeeklySummary() {
+    return _dio.get('/progress/measurements', queryParameters: {'period': 'weekly'});
+  }
+
+  Future<Response> getMonthlySummary() {
+    return _dio.get('/progress/measurements', queryParameters: {'period': 'monthly'});
+  }
+
+  Future<Response> getLatestMeasurement() {
+    return _dio.get('/progress/measurements', queryParameters: {'latest': true});
+  }
+
+  Future<Response> saveMeasurement(Map<String, dynamic> data) {
+    return _dio.post('/progress/measurements', data: data);
+  }
+
+  // ========================================
+  // PROFILE EXTRAS
+  // ========================================
+  Future<Response> uploadProfilePhoto(dynamic file) {
+    final formData = FormData.fromMap({
+      'photo': MultipartFile.fromFileSync(file.path),
+    });
+    return _dio.post('/users/profile/photo', data: formData);
+  }
+
+  Future<Response> removeProfilePhoto() {
+    return _dio.delete('/users/profile/photo');
+  }
+
+  // ========================================
+  // SOCIAL EXTRAS
+  // ========================================
+  Future<Response> getShareableProgress() {
+    return _dio.get('/progress/shareable');
+  }
+
+  // ========================================
+  // NOTIFICATION DETAIL
+  // ========================================
+  Future<Response> getNotificationDetail(String id) {
+    return _dio.get('/notifications/$id');
+  }
+
+  // ========================================
+  // SUBSCRIPTION MANAGEMENT
+  // ========================================
+  Future<Response> getSubscriptionManagement() {
+    return _dio.get('/subscriptions/current');
+  }
+
+  // ========================================
+  // AI SETTINGS
+  // ========================================
+  Future<Response> getAiSettings() {
+    return _dio.get('/ai/settings');
+  }
+
+  Future<Response> updateAiSettings(Map<String, dynamic> data) {
+    return _dio.put('/ai/settings', data: data);
+  }
 }
