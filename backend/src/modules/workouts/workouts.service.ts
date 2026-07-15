@@ -19,6 +19,7 @@ export class WorkoutsService {
   async findAllByUser(userId: string): Promise<Workout[]> {
     return this.workoutRepository.find({
       where: { userId },
+      relations: ['exercises'],
       order: { createdAt: 'DESC' },
     });
   }

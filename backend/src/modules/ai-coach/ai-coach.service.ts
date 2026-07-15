@@ -10,6 +10,7 @@ import { AiPrediction } from './entities/ai-prediction.entity';
 import { AiAlert } from './entities/ai-alert.entity';
 import { UserBehavior } from './entities/user-behavior.entity';
 import { UsersService } from '../users/users.service';
+import { WorkoutsService } from '../workouts/workouts.service';
 
 @Injectable()
 export class AiCoachService {
@@ -32,6 +33,7 @@ export class AiCoachService {
     @InjectRepository(UserBehavior)
     private behaviorRepository: Repository<UserBehavior>,
     private usersService: UsersService,
+    private workoutsService: WorkoutsService,
   ) {
     const apiKey = this.configService.get<string>('GEMINI_API_KEY');
     if (apiKey && !apiKey.startsWith('your-')) {
@@ -94,7 +96,11 @@ export class AiCoachService {
     const user = await this.usersService.findById(userId);
     const profile = user.profile;
 
-    const prompt = `Gere um treino personalizado para o usuário com as seguintes informações:
+    let workoutPlan: any;
+
+    if (this.aiEnabled && this.genAI) {
+      try {
+        const prompt = `Gere um treino personalizado para o usuário com as seguintes informações:
     - Nome: ${user.firstName}
     - Objetivo: ${profile?.goal || 'geral'}
     - Nível de experiência: ${profile?.experienceLevel || 'iniciante'}
@@ -102,7 +108,7 @@ export class AiCoachService {
     - Tempo disponível por treino: ${profile?.trainingTime || 60} minutos
     - Lesões ou restrições: ${profile?.injuries || 'nenhuma'}
     
-    Retorne um JSON com a estrutura:
+    Retorne APENAS um JSON válido (sem markdown, sem ```json) com a estrutura:
     {
       "name": "nome do treino",
       "exercises": [
@@ -116,28 +122,56 @@ export class AiCoachService {
       ]
     }`;
 
-    if (this.aiEnabled && this.genAI) {
-      try {
         const model = this.genAI.getGenerativeModel({ 
-          model: this.configService.get<string>('GEMINI_MODEL') || 'gemini-2.5-flash',
-          systemInstruction: 'Você é um personal trainer especializado em criar treinos personalizados. Retorne sempre em formato JSON válido.',
+          model: this.configService.get<string>('GEMINI_MODEL') || 'gemini-2.0-flash-lite',
+          systemInstruction: 'Você é um personal trainer especializado em criar treinos personalizados. Retorne sempre em formato JSON válido, sem markdown.',
         });
         const result = await model.generateContent(prompt);
-        const response = result.response.text();
-        const workoutPlan = JSON.parse(response || '{}');
+        let response = result.response.text() || '';
         
-        return {
-          ...workoutPlan,
-          goal: profile?.goal,
-          weekNumber: 1,
-          estimatedDuration: profile?.trainingTime || 60,
-        };
+        response = response.replace(/```json\n?/g, '').replace(/```\n?/g, '').trim();
+        
+        workoutPlan = JSON.parse(response);
       } catch (error) {
-        this.logger.error('Erro ao gerar treino com Gemini', error);
+        this.logger.error('Erro ao gerar treino com Gemini, usando fallback', error);
+        workoutPlan = this.getFallbackWorkout(user, profile);
       }
+    } else {
+      workoutPlan = this.getFallbackWorkout(user, profile);
     }
 
-    return this.getFallbackWorkout(user, profile);
+    try {
+      const workout = await this.workoutsService.create(userId, {
+        name: workoutPlan.name || 'Treino Personalizado',
+        goal: profile?.goal || 'general',
+        estimatedDuration: profile?.trainingTime || 60,
+      });
+
+      if (workoutPlan.exercises && Array.isArray(workoutPlan.exercises)) {
+        for (let i = 0; i < workoutPlan.exercises.length; i++) {
+          const ex = workoutPlan.exercises[i];
+          await this.workoutsService.addExercise(workout.id, {
+            name: ex.name,
+            orderNumber: i + 1,
+            sets: ex.sets || 3,
+            repetitions: ex.reps || '10-12',
+            restTime: parseInt(String(ex.rest || '60'), 10),
+            notes: ex.notes || '',
+          });
+        }
+      }
+
+      return {
+        id: workout.id,
+        ...workoutPlan,
+        goal: profile?.goal,
+        weekNumber: 1,
+        estimatedDuration: profile?.trainingTime || 60,
+      };
+    } catch (error) {
+      this.logger.error('Erro ao salvar treino gerado', error);
+      return workoutPlan;
+    }
   }
 
   async analyzeProgress(userId: string): Promise<any> {

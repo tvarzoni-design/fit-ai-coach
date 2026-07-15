@@ -17,8 +17,11 @@ export class WorkoutExercise {
   @Column({ name: 'workout_id' })
   workoutId: string;
 
-  @Column({ name: 'exercise_id' })
+  @Column({ name: 'exercise_id', nullable: true })
   exerciseId: string;
+
+  @Column({ nullable: true, length: 200 })
+  name: string;
 
   @Column({ name: 'order_number', type: 'int' })
   orderNumber: number;

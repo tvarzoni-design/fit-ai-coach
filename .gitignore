@@ -47,3 +47,6 @@ mobile/ios/.symlinks/
 
 # Coverage
 coverage/
+
+# GitHub Actions (token missing workflow scope)
+.github/workflows/ci.yml

@@ -37,15 +37,26 @@ class _CoachAiPageState extends State<CoachAiPage> {
               try {
                 final response = await api.generateWorkout();
                 final workout = response.data;
+                final name = workout['name'] ?? 'Personalizado';
+                final exercises = workout['exercises'] as List<dynamic>? ?? [];
+                final buffer = StringBuffer('Treino "$name" gerado!\n\n');
+                for (var i = 0; i < exercises.length; i++) {
+                  final ex = exercises[i];
+                  buffer.write('${i + 1}. ${ex['name']} - ${ex['sets']}x${ex['reps']} (descanso: ${ex['rest']})');
+                  if (ex['notes'] != null && ex['notes'].toString().isNotEmpty) {
+                    buffer.write('\n   ${ex['notes']}');
+                  }
+                  buffer.write('\n');
+                }
                 if (mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Treino "${workout['name'] ?? 'Personalizado'}" gerado!')),
-                  );
+                  setState(() {
+                    _messages.add({'role': 'assistant', 'message': buffer.toString()});
+                  });
                 }
               } catch (e) {
                 if (mounted) {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Erro ao gerar treino')),
+                    const SnackBar(content: Text('Erro ao gerar treino. Verifique sua conexão.')),
                   );
                 }
               }

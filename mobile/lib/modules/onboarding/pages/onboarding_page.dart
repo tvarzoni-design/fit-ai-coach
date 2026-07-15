@@ -541,18 +541,21 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
     try {
       final auth = context.read<AuthService>();
-      final api = auth.api;
-
-      await api.updateProfile({
-        'goal': _selectedGoal,
-        'experience': _selectedExperience,
-        'trainingDays': _trainingDays,
-        'weight': double.tryParse(_weightController.text),
-        'height': double.tryParse(_heightController.text),
-        'age': int.tryParse(_ageController.text),
-      });
 
       await auth.completeOnboarding();
+
+      // Try to sync with server in background (non-blocking)
+      try {
+        final api = auth.api;
+        await api.updateProfile({
+          'goal': _selectedGoal,
+          'experience': _selectedExperience,
+          'trainingDays': _trainingDays,
+          'weight': double.tryParse(_weightController.text),
+          'height': double.tryParse(_heightController.text),
+          'age': int.tryParse(_ageController.text),
+        });
+      } catch (_) {}
 
       if (!mounted) return;
       context.go('/home');
@@ -561,8 +564,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
       setState(() => _isLoading = false);
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Erro ao salvar preferências. Tente novamente.'),
+        SnackBar(
+          content: Text('Erro: $e'),
           backgroundColor: AppColors.error,
         ),
       );

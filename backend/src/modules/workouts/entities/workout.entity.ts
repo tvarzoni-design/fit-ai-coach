@@ -9,6 +9,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
+import { WorkoutExercise } from './workout-exercise.entity';
 
 export enum WorkoutStatus {
   ACTIVE = 'active',
@@ -61,4 +62,7 @@ export class Workout {
   @ManyToOne(() => User, (user) => user.achievements)
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @OneToMany(() => WorkoutExercise, (we) => we.workout)
+  exercises: WorkoutExercise[];
 }

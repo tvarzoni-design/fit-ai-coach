@@ -190,7 +190,7 @@ class _WorkoutsPageState extends State<WorkoutsPage> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Treino gerado com sucesso!')),
         );
-        _loadWorkouts();
+        await _loadWorkouts();
       }
     } catch (e) {
       if (mounted) {
