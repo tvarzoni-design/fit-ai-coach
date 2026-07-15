@@ -108,7 +108,7 @@ export class AiCoachService {
     - Tempo disponível por treino: ${profile?.trainingTime || 60} minutos
     - Lesões ou restrições: ${profile?.injuries || 'nenhuma'}
     
-    Retorne APENAS um JSON válido (sem markdown, sem ```json) com a estrutura:
+    Retorne APENAS um JSON válido (sem markdown, sem blocos de codigo) com a estrutura:
     {
       "name": "nome do treino",
       "exercises": [

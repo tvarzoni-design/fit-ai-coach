@@ -240,7 +240,7 @@ class ApiService extends ChangeNotifier {
   }
   
   Future<Response> getDailySummary(String date) {
-    return _dio.get('/nutrition/daily/$date');
+    return _dio.get('/nutrition/daily', queryParameters: {'date': date});
   }
   
   Future<Response> getMealHistory() {

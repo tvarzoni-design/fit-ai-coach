@@ -45,6 +45,11 @@ export class WorkoutsService {
     return this.workoutRepository.save(workout);
   }
 
+  async update(id: string, data: Partial<Workout>): Promise<Workout> {
+    await this.workoutRepository.update(id, data);
+    return this.findById(id);
+  }
+
   async addExercise(workoutId: string, exerciseData: Partial<WorkoutExercise>): Promise<WorkoutExercise> {
     const exercise = this.workoutExerciseRepository.create({
       workoutId,

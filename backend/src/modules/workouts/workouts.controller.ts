@@ -2,6 +2,7 @@ import {
   Controller,
   Get,
   Post,
+  Put,
   Delete,
   Body,
   Param,
@@ -41,6 +42,12 @@ export class WorkoutsController {
   @ApiOperation({ summary: 'Adicionar exercício ao treino' })
   async addExercise(@Param('id') id: string, @Body() body: any) {
     return this.workoutsService.addExercise(id, body);
+  }
+
+  @Put(':id')
+  @ApiOperation({ summary: 'Atualizar treino' })
+  async update(@Param('id') id: string, @Body() body: any) {
+    return this.workoutsService.update(id, body);
   }
 
   @Post('history')

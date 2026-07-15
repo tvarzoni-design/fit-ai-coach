@@ -39,6 +39,12 @@ export class ExercisesController {
     return this.exercisesService.getMuscleGroups();
   }
 
+  @Get('muscle-groups')
+  @ApiOperation({ summary: 'Listar grupos musculares (alias)' })
+  async getMuscleGroupsAlias() {
+    return this.exercisesService.getMuscleGroups();
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Buscar exercício por ID' })
   async findOne(@Param('id') id: string) {

@@ -25,6 +25,12 @@ export class CardioController {
     return this.cardioService.findAllByUser(req.user.id);
   }
 
+  @Get(':id')
+  @ApiOperation({ summary: 'Buscar sessão de cardio por ID' })
+  async findOne(@Param('id') id: string) {
+    return this.cardioService.findById(id);
+  }
+
   @Get('weekly')
   @ApiOperation({ summary: 'Resumo semanal de cardio' })
   async getWeeklySummary(@Request() req) {

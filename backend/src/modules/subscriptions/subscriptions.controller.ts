@@ -39,6 +39,14 @@ export class SubscriptionsController {
 
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
+  @Post('checkout')
+  @ApiOperation({ summary: 'Criar assinatura (checkout)' })
+  async checkout(@Request() req, @Body() body: any) {
+    return this.subscriptionsService.create(req.user.id, body);
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
   @Post('cancel')
   @ApiOperation({ summary: 'Cancelar assinatura' })
   async cancel(@Request() req) {

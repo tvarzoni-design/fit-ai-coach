@@ -71,9 +71,33 @@ export class CommunityController {
   @Post('follow/:userId')
   @ApiBearerAuth()
   @UseGuards(JwtAuthGuard)
-  @ApiOperation({ summary: 'Seguir/deixar de seguir usuário' })
+  @ApiOperation({ summary: 'Seguir usuário' })
   async followUser(@Request() req, @Param('userId') userId: string) {
     return this.communityService.followUser(req.user.id, userId);
+  }
+
+  @Delete('follow/:userId')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'Deixar de seguir usuário' })
+  async unfollowUser(@Request() req, @Param('userId') userId: string) {
+    return this.communityService.followUser(req.user.id, userId);
+  }
+
+  @Get('followers')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'Meus seguidores' })
+  async getMyFollowers(@Request() req) {
+    return this.communityService.getFollowers(req.user.id);
+  }
+
+  @Get('following')
+  @ApiBearerAuth()
+  @UseGuards(JwtAuthGuard)
+  @ApiOperation({ summary: 'Quem eu sigo' })
+  async getMyFollowing(@Request() req) {
+    return this.communityService.getFollowing(req.user.id);
   }
 
   @Get('users/:id/followers')

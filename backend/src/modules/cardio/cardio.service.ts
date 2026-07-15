@@ -17,6 +17,10 @@ export class CardioService {
     });
   }
 
+  async findById(id: string): Promise<CardioSession | null> {
+    return this.cardioRepository.findOne({ where: { id } });
+  }
+
   async create(userId: string, data: Partial<CardioSession>): Promise<CardioSession> {
     const session = this.cardioRepository.create({
       userId,
