@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import {
   LayoutDashboard,
   Users,
@@ -8,7 +8,9 @@ import {
   Bell,
   Settings,
   LogOut,
+  ScrollText,
 } from 'lucide-react';
+import { useAuth } from '../../contexts/AuthContext';
 
 const menuItems = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'Dashboard' },
@@ -17,10 +19,19 @@ const menuItems = [
   { to: '/ai', icon: MessageSquare, label: 'IA Coach' },
   { to: '/subscriptions', icon: CreditCard, label: 'Assinaturas' },
   { to: '/notifications', icon: Bell, label: 'Notificações' },
+  { to: '/audit-logs', icon: ScrollText, label: 'Logs de Auditoria' },
   { to: '/settings', icon: Settings, label: 'Configurações' },
 ];
 
 export default function Sidebar() {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <aside className="w-64 bg-gray-800 flex flex-col">
       <div className="p-6">
@@ -48,7 +59,10 @@ export default function Sidebar() {
       </nav>
       
       <div className="p-4 border-t border-gray-700">
-        <button className="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white w-full">
+        <button
+          onClick={handleLogout}
+          className="flex items-center gap-3 px-4 py-3 text-gray-400 hover:text-white w-full"
+        >
           <LogOut size={20} />
           <span>Sair</span>
         </button>

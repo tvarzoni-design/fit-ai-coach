@@ -9,6 +9,7 @@ import ExercisesPage from './components/exercises/ExercisesPage';
 import AiCoachPage from './components/ai-coach/AiCoachPage';
 import SubscriptionsPage from './components/subscriptions/SubscriptionsPage';
 import NotificationsPage from './components/notifications/NotificationsPage';
+import AuditLogsPage from './components/audit-logs/AuditLogsPage';
 import SettingsPage from './components/settings/SettingsPage';
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -41,6 +42,7 @@ function AppRoutes() {
         <Route path="ai" element={<AiCoachPage />} />
         <Route path="subscriptions" element={<SubscriptionsPage />} />
         <Route path="notifications" element={<NotificationsPage />} />
+        <Route path="audit-logs" element={<AuditLogsPage />} />
         <Route path="settings" element={<SettingsPage />} />
       </Route>
     </Routes>
