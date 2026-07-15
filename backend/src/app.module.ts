@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { TypeOrmModule, TypeOrmModuleOptions } from '@nestjs/typeorm';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { TypeOrmModuleOptions } from '@nestjs/typeorm/dist/interfaces/typeorm-options.interface';
 import { ThrottlerModule } from '@nestjs/throttler';
 import { AuthModule } from './modules/auth/auth.module';
 import { UsersModule } from './modules/users/users.module';
@@ -37,20 +38,20 @@ import { CommunityModule } from './modules/community/community.module';
             url: dbUrl,
             ssl: { rejectUnauthorized: false },
             autoLoadEntities: true,
-            synchronize: config.get('APP_ENV') !== 'production',
-            logging: config.get('APP_ENV') === 'development',
+            synchronize: config.get<string>('APP_ENV') !== 'production',
+            logging: config.get<string>('APP_ENV') === 'development',
           };
         }
         return {
           type: 'postgres',
-          host: config.get('DB_HOST', 'localhost'),
-          port: config.get<number>('DB_PORT', 5432),
-          username: config.get('DB_USERNAME', 'fitcoach'),
-          password: config.get('DB_PASSWORD'),
-          database: config.get('DB_NAME', 'fit_ai_coach'),
+          host: config.get<string>('DB_HOST') || 'localhost',
+          port: parseInt(config.get<string>('DB_PORT') || '5432', 10),
+          username: config.get<string>('DB_USERNAME') || 'fitcoach',
+          password: config.get<string>('DB_PASSWORD') || '',
+          database: config.get<string>('DB_NAME') || 'fit_ai_coach',
           autoLoadEntities: true,
-          synchronize: config.get('APP_ENV') !== 'production',
-          logging: config.get('APP_ENV') === 'development',
+          synchronize: config.get<string>('APP_ENV') !== 'production',
+          logging: config.get<string>('APP_ENV') === 'development',
         };
       },
     }),
