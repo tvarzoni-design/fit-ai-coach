@@ -1,0 +1,36 @@
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+import { User } from '../../users/entities/user.entity';
+import { Achievement } from './achievement.entity';
+
+@Entity('user_achievements')
+export class UserAchievement {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @Column({ name: 'user_id' })
+  userId: string;
+
+  @Column({ name: 'achievement_id' })
+  achievementId: string;
+
+  @Column({ name: 'unlocked_at', type: 'timestamp' })
+  unlockedAt: Date;
+
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt: Date;
+
+  @ManyToOne(() => User, (user) => user.achievements)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
+
+  @ManyToOne(() => Achievement)
+  @JoinColumn({ name: 'achievement_id' })
+  achievement: Achievement;
+}

@@ -1,0 +1,49 @@
+# Dependencies
+node_modules/
+.dart_tool/
+.packages
+
+# Environment variables (NEVER commit)
+.env
+.env.local
+.env.*.local
+
+# Build outputs
+dist/
+build/
+*.log
+
+# Docker data
+postgres_data/
+redis_data/
+
+# Admin
+admin/node_modules/
+admin/dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Flutter
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/build/
+mobile/.dart_tool/
+
+# Android
+mobile/android/.gradle/
+mobile/android/app/build/
+mobile/android/local.properties
+
+# iOS
+mobile/ios/Pods/
+mobile/ios/.symlinks/
+
+# Coverage
+coverage/
