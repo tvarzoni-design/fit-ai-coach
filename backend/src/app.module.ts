@@ -38,7 +38,7 @@ import { CommunityModule } from './modules/community/community.module';
             url: dbUrl,
             ssl: { rejectUnauthorized: false },
             autoLoadEntities: true,
-            synchronize: config.get<string>('APP_ENV') !== 'production',
+            synchronize: true,
             logging: config.get<string>('APP_ENV') === 'development',
           };
         }

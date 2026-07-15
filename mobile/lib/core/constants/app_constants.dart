@@ -1,11 +1,8 @@
 import 'dart:io' show Platform;
 
 class AppConstants {
-  // API - Android real device uses PC's local IP
-  static String get apiBaseUrl {
-    if (Platform.isAndroid) return 'http://192.168.1.2:3000/v1';
-    return 'http://localhost:3000/v1';
-  }
+  // API - Cloud deployment
+  static String get apiBaseUrl => 'https://fit-ai-coach-api-iv09.onrender.com/v1';
   
   // Storage Keys
   static const String tokenKey = 'auth_token';
