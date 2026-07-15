@@ -51,6 +51,14 @@ class ApiService extends ChangeNotifier {
   
   Dio get dio => _dio;
   
+  Future<Response> get(String path, {Map<String, dynamic>? queryParameters}) {
+    return _dio.get(path, queryParameters: queryParameters);
+  }
+
+  Future<Response> post(String path, {Map<String, dynamic>? data}) {
+    return _dio.post(path, data: data);
+  }
+  
   Future<bool> _refreshToken() async {
     try {
       final prefs = await SharedPreferences.getInstance();

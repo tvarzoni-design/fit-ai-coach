@@ -8,6 +8,7 @@ import '../../modules/auth/pages/forgot_password_page.dart';
 import '../../modules/auth/pages/reset_password_page.dart';
 import '../../modules/auth/pages/change_password_page.dart';
 import '../../modules/auth/pages/email_verification_page.dart';
+import '../../modules/auth/pages/two_factor_setup_page.dart';
 
 // Onboarding
 import '../../modules/onboarding/pages/onboarding_page.dart';
@@ -19,6 +20,8 @@ import '../../modules/splash/pages/splash_page.dart';
 import '../../modules/home/pages/home_page.dart';
 import '../../modules/home/pages/daily_summary_page.dart';
 import '../../modules/home/pages/activity_heatmap_page.dart';
+import '../../modules/home/pages/quick_actions_page.dart';
+import '../../modules/home/pages/goals_progress_page.dart';
 
 // Workouts
 import '../../modules/workouts/pages/workouts_page.dart';
@@ -36,12 +39,24 @@ import '../../modules/workouts/pages/workout_templates_page.dart';
 import '../../modules/workouts/pages/workout_calendar_page.dart';
 import '../../modules/workouts/pages/exercise_selection_page.dart';
 import '../../modules/workouts/pages/workout_share_page.dart';
+import '../../modules/workouts/pages/previous_workouts_page.dart';
+import '../../modules/workouts/pages/workout_notes_page.dart';
+import '../../modules/workouts/pages/rest_settings_page.dart';
+import '../../modules/workouts/pages/workout_comparison_page.dart';
+import '../../modules/workouts/pages/personal_bests_page.dart';
+import '../../modules/workouts/pages/workout_split_page.dart';
+import '../../modules/workouts/pages/deload_week_page.dart';
+import '../../modules/workouts/pages/workout_share_community_page.dart';
 
 // Exercises
 import '../../modules/exercises/pages/exercise_detail_page.dart';
 import '../../modules/exercises/pages/exercise_video_page.dart';
 import '../../modules/exercises/pages/exercise_browser_page.dart';
 import '../../modules/exercises/pages/exercise_category_page.dart';
+import '../../modules/exercises/pages/exercise_muscle_map_page.dart';
+import '../../modules/exercises/pages/exercise_comparison_page.dart';
+import '../../modules/exercises/pages/exercise_tips_page.dart';
+import '../../modules/exercises/pages/exercise_history_page.dart';
 
 // Coach AI
 import '../../modules/coach_ai/pages/coach_ai_page.dart';
@@ -51,6 +66,9 @@ import '../../modules/coach_ai/pages/ai_nutrition_plan_page.dart';
 import '../../modules/coach_ai/pages/ai_analysis_page.dart';
 import '../../modules/coach_ai/pages/ai_settings_page.dart';
 import '../../modules/coach_ai/pages/workout_suggestion_detail_page.dart';
+import '../../modules/coach_ai/pages/ai_mood_check_page.dart';
+import '../../modules/coach_ai/pages/ai_recovery_page.dart';
+import '../../modules/coach_ai/pages/ai_progress_insights_page.dart';
 
 // Progress
 import '../../modules/progress/pages/progress_page.dart';
@@ -67,6 +85,8 @@ import '../../modules/profile/pages/profile_edit_page.dart';
 import '../../modules/profile/pages/badges_page.dart';
 import '../../modules/profile/pages/activity_timeline_page.dart';
 import '../../modules/profile/pages/change_photo_page.dart';
+import '../../modules/profile/pages/profile_stats_page.dart';
+import '../../modules/profile/pages/achievements_showcase_page.dart';
 
 // Nutrition
 import '../../modules/nutrition/pages/nutrition_page.dart';
@@ -79,11 +99,20 @@ import '../../modules/nutrition/pages/macro_calculator_page.dart';
 import '../../modules/nutrition/pages/meal_plan_page.dart';
 import '../../modules/nutrition/pages/recipes_page.dart';
 import '../../modules/nutrition/pages/food_detail_page.dart';
+import '../../modules/nutrition/pages/supplement_tracker_page.dart';
+import '../../modules/nutrition/pages/water_reminder_page.dart';
+import '../../modules/nutrition/pages/nutrition_tips_page.dart';
+import '../../modules/nutrition/pages/meal_prep_page.dart';
+import '../../modules/nutrition/pages/grocery_list_page.dart';
+import '../../modules/nutrition/pages/calorie_cycle_page.dart';
 
 // Cardio
 import '../../modules/cardio/pages/cardio_detail_page.dart';
 import '../../modules/cardio/pages/cardio_history_page.dart';
 import '../../modules/cardio/pages/cardio_stats_page.dart';
+import '../../modules/cardio/pages/cardio_realtime_page.dart';
+import '../../modules/cardio/pages/cardio_export_page.dart';
+import '../../modules/cardio/pages/cardio_goals_page.dart';
 
 // Body Analysis
 import '../../modules/body_analysis/pages/body_analysis_page.dart';
@@ -92,6 +121,8 @@ import '../../modules/body_analysis/pages/body_fat_calculator_page.dart';
 import '../../modules/body_analysis/pages/ideal_weight_page.dart';
 import '../../modules/body_analysis/pages/progress_photos_page.dart';
 import '../../modules/body_analysis/pages/body_composition_detail_page.dart';
+import '../../modules/body_analysis/pages/body_analysis_history_page.dart';
+import '../../modules/body_analysis/pages/body_fat_trends_page.dart';
 
 // Community
 import '../../modules/community/pages/community_page.dart';
@@ -99,6 +130,9 @@ import '../../modules/community/pages/leaderboard_page.dart';
 import '../../modules/community/pages/post_detail_page.dart';
 import '../../modules/community/pages/create_post_page.dart';
 import '../../modules/community/pages/user_profile_page.dart';
+import '../../modules/community/pages/community_settings_page.dart';
+import '../../modules/community/pages/report_post_page.dart';
+import '../../modules/community/pages/challenge_share_page.dart';
 
 // Gamification
 import '../../modules/gamification/pages/achievements_page.dart';
@@ -108,6 +142,10 @@ import '../../modules/gamification/pages/league_detail_page.dart';
 import '../../modules/gamification/pages/xp_history_page.dart';
 import '../../modules/gamification/pages/streak_page.dart';
 import '../../modules/gamification/pages/reward_detail_page.dart';
+import '../../modules/gamification/pages/season_rewards_page.dart';
+import '../../modules/gamification/pages/challenge_create_page.dart';
+import '../../modules/gamification/pages/xp_calculator_page.dart';
+import '../../modules/gamification/pages/streak_freeze_page.dart';
 
 // Premium
 import '../../modules/premium/pages/premium_page.dart';
@@ -115,13 +153,18 @@ import '../../modules/premium/pages/plan_comparison_page.dart';
 import '../../modules/premium/pages/payment_methods_page.dart';
 import '../../modules/premium/pages/invoice_history_page.dart';
 import '../../modules/premium/pages/subscription_management_page.dart';
+import '../../modules/premium/pages/restore_purchases_page.dart';
+import '../../modules/premium/pages/feature_comparison_page.dart';
+import '../../modules/premium/pages/trial_page.dart';
 
 // Notifications
 import '../../modules/notifications/pages/smart_notifications_page.dart';
 import '../../modules/notifications/pages/notification_detail_page.dart';
+import '../../modules/notifications/pages/notification_preferences_page.dart';
 
 // Predictive
 import '../../modules/predictive/pages/predictive_page.dart';
+import '../../modules/predictive/pages/prediction_detail_page.dart';
 
 // Settings
 import '../../modules/settings/pages/settings_page.dart';
@@ -132,20 +175,29 @@ import '../../modules/settings/pages/help_page.dart';
 import '../../modules/settings/pages/about_page.dart';
 import '../../modules/settings/pages/language_settings_page.dart';
 import '../../modules/settings/pages/theme_settings_page.dart';
+import '../../modules/settings/pages/data_usage_page.dart';
+import '../../modules/settings/pages/accessibility_page.dart';
+import '../../modules/settings/pages/notification_test_page.dart';
 
 // Health
 import '../../modules/health/pages/sleep_tracker_page.dart';
 import '../../modules/health/pages/hydration_tracker_page.dart';
 import '../../modules/health/pages/weight_tracker_page.dart';
 import '../../modules/health/pages/steps_counter_page.dart';
+import '../../modules/health/pages/health_dashboard_page.dart';
+import '../../modules/health/pages/heart_rate_zone_page.dart';
+import '../../modules/health/pages/rest_day_page.dart';
+import '../../modules/health/pages/stress_tracker_page.dart';
 
 // Search
 import '../../modules/search/pages/search_page.dart';
+import '../../modules/search/pages/search_history_page.dart';
 
 // Social
 import '../../modules/social/pages/followers_page.dart';
 import '../../modules/social/pages/following_page.dart';
 import '../../modules/social/pages/share_progress_page.dart';
+import '../../modules/social/pages/social_feed_page.dart';
 
 // LGPD
 import '../../modules/lgpd/pages/lgpd_consent_page.dart';
@@ -156,6 +208,10 @@ import '../../modules/lgpd/pages/terms_of_service_page.dart';
 
 // Workouts extras
 import '../../modules/workouts/pages/previous_workouts_page.dart';
+
+// Common
+import '../../modules/common/pages/empty_state_page.dart';
+import '../../modules/common/pages/error_page.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -299,10 +355,13 @@ class AppRouter {
       // Home extras
       GoRoute(path: '/daily-summary', builder: (context, state) => const DailySummaryPage()),
       GoRoute(path: '/activity-heatmap', builder: (context, state) => const ActivityHeatmapPage()),
+      GoRoute(path: '/quick-actions', builder: (context, state) => const QuickActionsPage()),
+      GoRoute(path: '/goals-progress', builder: (context, state) => const GoalsProgressPage()),
 
       // Auth extras
       GoRoute(path: '/change-password', builder: (context, state) => const ChangePasswordPage()),
       GoRoute(path: '/email-verification', builder: (context, state) => EmailVerificationPage(email: state.uri.queryParameters['email'] ?? '')),
+      GoRoute(path: '/two-factor-setup', builder: (context, state) => const TwoFactorSetupPage()),
 
       // Coach AI extras
       GoRoute(path: '/ai-settings', builder: (context, state) => const AiSettingsPage()),
@@ -310,6 +369,9 @@ class AppRouter {
         final extra = state.extra as Map<String, dynamic>?;
         return WorkoutSuggestionDetailPage(workout: extra);
       }),
+      GoRoute(path: '/ai-mood-check', builder: (context, state) => const AiMoodCheckPage()),
+      GoRoute(path: '/ai-recovery', builder: (context, state) => const AiRecoveryPage()),
+      GoRoute(path: '/ai-progress-insights', builder: (context, state) => const AIProgressInsightsPage()),
 
       // Progress extras
       GoRoute(path: '/weekly-summary', builder: (context, state) => const WeeklySummaryPage()),
@@ -318,39 +380,115 @@ class AppRouter {
 
       // Profile extras
       GoRoute(path: '/change-photo', builder: (context, state) => const ChangePhotoPage()),
+      GoRoute(path: '/profile-stats', builder: (context, state) => const ProfileStatsPage()),
+      GoRoute(path: '/achievements-showcase', builder: (context, state) => const AchievementsShowcasePage()),
 
       // Nutrition extras
       GoRoute(path: '/food-detail', builder: (context, state) {
         final name = state.uri.queryParameters['name'];
         return FoodDetailPage(foodName: name);
       }),
+      GoRoute(path: '/supplement-tracker', builder: (context, state) => const SupplementTrackerPage()),
+      GoRoute(path: '/water-reminder', builder: (context, state) => const WaterReminderPage()),
+      GoRoute(path: '/nutrition-tips', builder: (context, state) => const NutritionTipsPage()),
+      GoRoute(path: '/meal-prep', builder: (context, state) => const MealPrepPage()),
+      GoRoute(path: '/grocery-list', builder: (context, state) => const GroceryListPage()),
+      GoRoute(path: '/calorie-cycle', builder: (context, state) => const CalorieCyclePage()),
+
+      // Cardio extras
+      GoRoute(path: '/cardio-realtime', builder: (context, state) => const CardioRealtimePage()),
+      GoRoute(path: '/cardio-export', builder: (context, state) => const CardioExportPage()),
+      GoRoute(path: '/cardio-goals', builder: (context, state) => const CardioGoalsPage()),
 
       // Body Analysis extras
       GoRoute(path: '/body-composition-detail', builder: (context, state) => const BodyCompositionDetailPage()),
+      GoRoute(path: '/body-analysis-history', builder: (context, state) => const BodyAnalysisHistoryPage()),
+      GoRoute(path: '/body-fat-trends', builder: (context, state) => const BodyFatTrendsPage()),
 
       // Community extras
       GoRoute(path: '/followers', builder: (context, state) => const FollowersPage()),
       GoRoute(path: '/following', builder: (context, state) => const FollowingPage()),
       GoRoute(path: '/share-progress', builder: (context, state) => const ShareProgressPage()),
+      GoRoute(path: '/community-settings', builder: (context, state) => const CommunitySettingsPage()),
+      GoRoute(path: '/report-post', builder: (context, state) => const ReportPostPage()),
+      GoRoute(path: '/challenge-share', builder: (context, state) => const ChallengeSharePage()),
 
       // Gamification extras
       GoRoute(path: '/reward/:id', builder: (context, state) {
         final extra = state.extra as Map<String, dynamic>?;
         return RewardDetailPage(reward: extra);
       }),
+      GoRoute(path: '/season-rewards', builder: (context, state) => const SeasonRewardsPage()),
+      GoRoute(path: '/challenge-create', builder: (context, state) => const ChallengeCreatePage()),
+      GoRoute(path: '/xp-calculator', builder: (context, state) => const XPCalculatorPage()),
+      GoRoute(path: '/streak-freeze', builder: (context, state) => const StreakFreezePage()),
 
       // Premium extras
       GoRoute(path: '/subscription-management', builder: (context, state) => const SubscriptionManagementPage()),
+      GoRoute(path: '/restore-purchases', builder: (context, state) => const RestorePurchasesPage()),
+      GoRoute(path: '/feature-comparison', builder: (context, state) => const FeatureComparisonPage()),
+      GoRoute(path: '/trial', builder: (context, state) => const TrialPage()),
 
       // Notifications extras
       GoRoute(path: '/notification/:id', builder: (context, state) => NotificationDetailPage(notificationId: state.pathParameters['id']!)),
+      GoRoute(path: '/notification-preferences', builder: (context, state) => const NotificationPreferencesPage()),
+
+      // Predictive extras
+      GoRoute(path: '/prediction/:type', builder: (context, state) => PredictionDetailPage(predictionType: state.pathParameters['type']!)),
 
       // Settings extras
       GoRoute(path: '/language-settings', builder: (context, state) => const LanguageSettingsPage()),
       GoRoute(path: '/theme-settings', builder: (context, state) => const ThemeSettingsPage()),
+      GoRoute(path: '/data-usage', builder: (context, state) => const DataUsagePage()),
+      GoRoute(path: '/accessibility', builder: (context, state) => const AccessibilityPage()),
+      GoRoute(path: '/notification-test', builder: (context, state) => const NotificationTestPage()),
 
-      // Workouts extras
+      // Health extras
+      GoRoute(path: '/health-dashboard', builder: (context, state) => const HealthDashboardPage()),
+      GoRoute(path: '/heart-rate-zones', builder: (context, state) => const HeartRateZonePage()),
+      GoRoute(path: '/rest-day', builder: (context, state) => const RestDayPage()),
+      GoRoute(path: '/stress-tracker', builder: (context, state) => const StressTrackerPage()),
+
+      // Search extras
+      GoRoute(path: '/search-history', builder: (context, state) => const SearchHistoryPage()),
+
+      // Social extras
+      GoRoute(path: '/social-feed', builder: (context, state) => const SocialFeedPage()),
+
+      // Workouts extras 2
       GoRoute(path: '/previous-workouts', builder: (context, state) => const PreviousWorkoutsPage()),
+      GoRoute(path: '/workout-notes', builder: (context, state) => const WorkoutNotesPage()),
+      GoRoute(path: '/rest-settings', builder: (context, state) => const RestSettingsPage()),
+      GoRoute(path: '/workout-comparison', builder: (context, state) => const WorkoutComparisonPage()),
+      GoRoute(path: '/personal-bests', builder: (context, state) => const PersonalBestsPage()),
+      GoRoute(path: '/workout-split', builder: (context, state) => const WorkoutSplitPage()),
+      GoRoute(path: '/deload-week', builder: (context, state) => const DeloadWeekPage()),
+      GoRoute(path: '/workout-share-community', builder: (context, state) => const WorkoutShareCommunityPage()),
+
+      // Exercises extras
+      GoRoute(path: '/exercise-muscle-map', builder: (context, state) => const ExerciseMuscleMapPage()),
+      GoRoute(path: '/exercise-comparison', builder: (context, state) => const ExerciseComparisonPage()),
+      GoRoute(path: '/exercise-tips', builder: (context, state) => ExerciseTipsPage(exerciseName: state.uri.queryParameters['name'] ?? '')),
+      GoRoute(path: '/exercise-history/:id', builder: (context, state) => ExerciseHistoryPage(exerciseId: state.pathParameters['id']!)),
+
+      // Common
+      GoRoute(path: '/empty-state', builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>? ?? {};
+        return EmptyStatePage(
+          icon: extra['icon'] as IconData? ?? Icons.inbox,
+          title: extra['title'] as String? ?? 'Vazio',
+          description: extra['description'] as String? ?? 'Nada aqui ainda.',
+          actionLabel: extra['actionLabel'] as String?,
+          onAction: extra['onAction'] as VoidCallback?,
+        );
+      }),
+      GoRoute(path: '/error', builder: (context, state) {
+        final extra = state.extra as Map<String, dynamic>? ?? {};
+        return ErrorPage(
+          message: extra['message'] as String? ?? 'Ocorreu um erro',
+          onRetry: extra['onRetry'] as VoidCallback?,
+        );
+      }),
 
       // LGPD
       GoRoute(path: '/lgpd-consent', builder: (context, state) => const LgpdConsentPage()),
